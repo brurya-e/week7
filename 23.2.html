@@ -63,9 +63,7 @@ height:50px;
     <script>
         const timer = document.querySelector('#timer');
         const startBtn = document.querySelector('#start');
-        console.log(startBtn);
         const stopBtn = document.querySelector('#stop');
-        console.log(stopBtn);
 
         setInterval(displayTime, 1000);
 
@@ -88,7 +86,6 @@ height:50px;
         startBtn.addEventListener('click', startTimer);
         stopBtn.addEventListener('click', stopTimer);
 
-
         function displayTime() {
             if (timerFlage) {
                 seconds = seconds + 1;
@@ -106,11 +103,7 @@ height:50px;
                     minutes = 0;
                     hours = 0;
                 }
-                _hours = +hours < 10 ? "0" + hours : hours;
-                _minutes = +minutes < 10 ? "0" + minutes : minutes;
-                _seconds = +seconds < 10 ? "0" + seconds : seconds;
-                timer.innerText = _hours + ":" + _minutes + ":" + _seconds;
-
+                timer.innerText = String(hours).padStart(2, "0") + ":" +String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
             }
         }
 

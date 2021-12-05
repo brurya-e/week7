@@ -58,25 +58,9 @@ body {
             let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
             let today = weekDay[timeNow.getDay()];
             let months = timeNow.toLocaleString("default", { month: "long"});
-            let year = timeNow.getFullYear();
-            // let period = "AM";
+            let year = timeNow.getFullYear(); 
 
-            // if (hoursOfDay > 12) {
-            //     hoursOfDay -= 12;
-            //     period = "PM";
-            // }
-
-            // if (hoursOfDay === 0) {
-            //     hoursOfDay = 12;
-            //     period = "AM";
-            // }
-
-            // hoursOfDay = hoursOfDay < 10 ? "0" + hoursOfDay : hoursOfDay;
-            // minutes = minutes < 10 ? "0" + minutes : minutes;
-            // seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            let time = hoursOfDay + ":" + minutes + ":" + seconds;
-            //  + period;
+            let time = String(hoursOfDay).padStart(2, "0") + ":" + String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
 
             document.getElementById('Clock').innerHTML = time + " " + today + " " + months + " " + year;
 
