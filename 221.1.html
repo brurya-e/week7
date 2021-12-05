@@ -1,0 +1,88 @@
+<!-- Create a webpage that has a ticking clock with the hours, minutes and
+seconds.  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22.1</title>
+    <style>
+        * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100vh;
+     background: #000;
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+}
+.text{
+    font-size: 50px;
+    text-align: center;
+    color:white;
+}
+.glow {
+     font-size: 60px;
+     color: #fff;
+     font-weight: bold;
+     animation: glow 1s ease-in-out infinite alternate;
+ 
+}
+    </style>
+</head>
+
+<body>
+    <div>
+        <div  class = "text">The Time is: </div>
+        <div id="Clock" class="glow">00:00:00</div>
+    </div>
+    <script>
+        setInterval(displayTime, 1000);
+
+        function displayTime() {
+
+            const timeNow = new Date();
+
+            let hoursOfDay = timeNow.getHours();
+            let minutes = timeNow.getMinutes();
+            let seconds = timeNow.getSeconds();
+            let weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+            let today = weekDay[timeNow.getDay()];
+            let months = timeNow.toLocaleString("default", { month: "long"});
+            let year = timeNow.getFullYear();
+            // let period = "AM";
+
+            // if (hoursOfDay > 12) {
+            //     hoursOfDay -= 12;
+            //     period = "PM";
+            // }
+
+            // if (hoursOfDay === 0) {
+            //     hoursOfDay = 12;
+            //     period = "AM";
+            // }
+
+            // hoursOfDay = hoursOfDay < 10 ? "0" + hoursOfDay : hoursOfDay;
+            // minutes = minutes < 10 ? "0" + minutes : minutes;
+            // seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            let time = hoursOfDay + ":" + minutes + ":" + seconds;
+            //  + period;
+
+            document.getElementById('Clock').innerHTML = time + " " + today + " " + months + " " + year;
+
+        }
+        displayTime();
+    </script>
+</body>
+
+</html>
