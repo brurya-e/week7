@@ -86,7 +86,7 @@ height:50px;
         };
 
         startBtn.addEventListener('click', startTimer);
-        stopBtn.addEventListener('click', stopTimer);
+        stopBtn.addEventListener('click', ()=>{ console.log(this);});
 
 
         function displayTime() {

@@ -1,0 +1,66 @@
+<!-- Answer the following questions:
+Question 1:
+In your own words what will this point to and why?(Note
+this is the global scope)
+console.log(this);
+
+Window
+החלון עצמו, הדף כולו שעליו אנחנו עובדים
+
+Question 2:
+a. In your own words what will this point to and why.
+print only hello
+this point to window becaouse greet is an arow function
+b. How can you fix this code.
+
+const myObj = {
+ name: "Timmy",
+ greet: () => { <====>  greet() {
+ console.log(`Hello ${this.name}`);
+ },
+};
+myObj.greet();
+
+Question 3:
+In your own words what will this point to and why?
+const myFuncDec = function () {
+ console.log(this);
+};
+myFuncDec כרגע כלום, אם נקרא לפונקציה 
+window יודפס 
+כמו בשאלה הקודמת בגלל שהפונקציה הםנימית  
+
+Question 4:
+In your own words what will this point to and why?
+const myFuncArrow = () => {
+ console.log(this);
+};
+myFuncArrow();
+
+כמו בשאלה הקודמת יודפס WIN
+
+Question 5:
+a. In your own words what will this point to and why.
+b. How can you fix this code.
+document.querySelector(".element").addEventListener(() => {
+ console.log(this);
+ 
+ arow function
+ ידפיס WINDOW
+}); -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    </script>
+</body>
+
+</html>
