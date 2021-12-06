@@ -7,11 +7,15 @@ function Square(a, b, c, d){
     this.b = b;
     this.c = c;
     this.d = d;
-    this.isSquare=()=>{
-        return(this.a==this.b==this.c==this.d)
-    };
 }
+
+function isSquare(){
+    return(this.a===this.b && this.b===this.c && this.c ===this.d)
+}
+
+Square.prototype.isSquare = isSquare;
+
 seq= new Square(1,2,3,4);
 seq2= new Square(1,1,1,1);
 
-console.log(seq2.isSquare());
+console.log(seq.isSquare());
