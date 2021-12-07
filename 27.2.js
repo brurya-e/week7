@@ -11,8 +11,31 @@ const makeAllCaps = (words) => {
     for (let i = 0; i < words.length; i++) {
         words[index] = words[index].toUpperCase();
     }
+    console.log("caps");
 }
 
 const sortWords = (words) => {
-    words.sort();
+    return new Promise((resolve, reject) => {
+        let temp = words.join('');
+        console.log(temp);
+        console.log(!/[^a-zA-Z]/.test(temp))
+        if ((/[^a-zA-Z]/.test(temp))){
+            console.log('no')
+            reject();
+        }
+        else {
+            console.log('yes')
+            resolve(words.sort());
+        }
+    });
+    
 }
+
+arr = ['aa','bb', 'Asd'];
+arr2 = ['a23','bb', 'Asd']
+sortWords(arr2)
+    .then((res) =>{ 
+        console.log(res)
+        makeAllCaps(res)})
+    // .then()
+    .catch(() => { console.log("array not contains only strings") })
