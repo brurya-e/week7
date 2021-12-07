@@ -3,41 +3,24 @@
 // If it is greater than 10 it is resolved, if it is less than 10 it is rejected.
 // Call the function and print the resolve and reject in a .then, .catch.
 
-// const greaterThanTen = (number) => {
-//     return new Promise((resolve, reject) => {
-//         if (number > 10)
-//             resolve();
-//         else    
-//             reject();
 
-//     });
-// };
+const func = (number) =>{
 
-// greaterThanTen().then(() => {
-//     console.log("greater Than Ten");
-// })
-// greaterThanTen().catch(() => {
-//         console.log(" not greater Than Ten");
-// });
-
-
-// greaterThanTen(12);
-
-
-
-const func = (number = 2) =>{
     return new Promise((resolve,reject)=>{
         if (number > 10)
-        resolve();
+            resolve();
         else
-        reject();
+            reject(number);
     });
 }
-func(number = 2)
+
+let x =2;
+
+func(x)
 .then(() => {
     console.log("greater");
 })
-.catch(() => {
-        console.log("not greater");
+.catch((number) => {
+        console.log(number + " not greater");
 });
 
