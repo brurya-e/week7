@@ -1,0 +1,88 @@
+<!-- Lets do an simple ajax call with fetch using this url “https://// api.jokes.one/jod”.
+ Create a button that will fetch the joke of the day. Display
+ to the screen the jokes title and the joke itself. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28.1</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .joke {
+            display: flex;
+            flex-wrap: wrap;
+            justify-items: center;
+            width: 70vw;
+            height: 70vh;
+            background-color: violet;
+            margin-left: 15vw;
+            margin-top: 15vh;
+        }
+
+        .title {
+            margin-top: 1%;
+            width: 100%;
+            height: 10%;
+            background-color: tomato;
+            text-align: center;
+
+        }
+
+        .theJoke {
+            width: 100%;
+            height: 70%;
+            background-color: urquoise;
+            text-align: center;
+        }
+
+        .btnJoke {
+            width: 100%;
+            height: 10%;
+            background-color: yellow;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="joke">
+        <div class="title"></div>
+        <div class="theJoke"></div>
+        <input class="btnJoke" type="button" value="give me a joke">
+    </div>
+    <script>
+        const btnJoke = document.querySelector('.btnJoke');
+        const title = document.querySelector('.title');
+        const theJoke = document.querySelector('.theJoke');
+
+        jokeUrl = 'https://api.jokes.one/jod'
+
+        async function getJoke() {
+            try{
+            const response = await fetch(jokeUrl)
+            const jokeJson = await response.json();
+            const joke = jokeJson.contents.jokes[0].joke;
+            theJoke.textContent = joke.text;
+            title.textContent = joke.title;
+            }
+            catch(e)
+            {
+                 theJoke.textContent = 'try again';
+            }
+        }
+
+        btnJoke.addEventListener('click', getJoke);
+
+    </script>
+</body>
+
+</html>

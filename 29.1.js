@@ -31,6 +31,11 @@ async function f() {
     console.log(IDs);
     const recipe = await getRecipe(IDs[2]);
     console.log(recipe);
+
+    // const IDs =  getIDs()
+    // const recipe =  getRecipe(IDs[2]);
+    // const res = await Promise.all([IDs,recipe]);
+    // console.log(res)
 }
 
 f().catch((error) => {
