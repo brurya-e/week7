@@ -21,14 +21,16 @@
             justify-content: space-between;
             flex-wrap: wrap;
         }
-        #userName{
+
+        #userName {
             width: 73%;
             height: 100%;
             font-size: 25px;
 
         }
-        .searchBtn{
-            width:25%;
+
+        .searchBtn {
+            width: 25%;
             height: 100%;
             background-color: tomato;
 
@@ -74,7 +76,7 @@
 
 <body>
     <div class="search">
-        <input type="text" name="userName" id="userName" >
+        <input type="text" name="userName" id="userName">
         <input type="button" class="searchBtn" value="search">
     </div>
     <div class="users"> </div>
@@ -82,29 +84,38 @@
     <script>
         const searchBtn = document.querySelector('.searchBtn');
         const usersElement = document.querySelector('.users');
+        const allUsers = [];
         async function getInfo() {
-            try {
-                const userName = document.querySelector('#userName').value;
-                console.log(userName);
-                userUrl = `https://api.github.com/users/${userName}`
+            const userName = document.querySelector('#userName').value;
+            if (allUsers.includes(userName)) { 
+                document.querySelector('#userName').value ='duplicate'
+ // throw new Error ('duplicate');
+            }
+            else {
+                allUsers.push(userName);
+                try {
 
-                const data = await (await fetch(userUrl)).json();
-                const link = data.html_url
-                const imageUrl = data.avatar_url;
-                const publicRepos = data.public_repos;
-                const name = data.name;
-                const newUser =
-                    `<div class="user">
+                    userUrl = `https://api.github.com/users/${userName}`
+
+                    const data = await (await fetch(userUrl)).json();
+                    const link = data.html_url
+                    const imageUrl = data.avatar_url;
+                    const publicRepos = data.public_repos;
+                    const name = data.name;
+                    const newUser =
+                        `<div class="user">
                                     <img class="pic"  src= "${imageUrl}">
-                                    <div class="linkName"><a href="${link}">${name}</a></div>
+                                    <div class="linkName"><a href="${link}" target="_blank">${name}</a></div>
                                     <div class="repo">${publicRepos}</div>
                                 </div>`
-                usersElement.innerHTML += newUser;
-            }
+                    usersElement.innerHTML += newUser;
+                }
+            
             catch (e) {
                 console.log(e)
-                usersElement.innerHTML+= e
+                document.querySelector('#userName').value =e;
             }
+        }
         }
 
         searchBtn.addEventListener('click', getInfo);
