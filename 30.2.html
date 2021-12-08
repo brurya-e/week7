@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie API</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .search {
+            width: 30vw;
+            height: 10vh;
+            padding: 1%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        #movie {
+            width: 73%;
+            height: 100%;
+            font-size: 25px;
+
+        }
+
+        .searchBtn {
+            width: 25%;
+            height: 100%;
+            background-color: tomato;
+
+        }
+
+        .item {
+            padding-left: 30vw;
+            width: 70vw;
+            height: 90vh;
+            display: flex;
+            justify-content: start;
+            flex-wrap: wrap;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .poster {
+            width: 100%;
+            height: 30%;
+        }
+
+        .title {
+            width: 100%;
+            height: 5%;
+        }
+
+        .genre {
+            width: 100%;
+            height: 5%;
+        }
+
+        .year {
+            width: 100%;
+            height: 5%;
+        }
+
+        .plot {
+            width: 100%;
+            height: 15%;
+        }
+
+        .director {
+            width: 100%;
+            height: 5%;
+        }
+
+        .actor {
+            width: 100%;
+            height: 5%;
+        }
+
+        .rating {
+            display: flex;
+            width: 100%;
+            height: 10%;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .rat {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input type="text" name="movie" id="movie">
+        <input type="button" class="searchBtn" value="search">
+    </div>
+    <div class="item">
+    </div>
+
+    <script>
+        //TODO: focus and some styling
+        const APIKEY = '2e11c8b7';
+        const searchBtn = document.querySelector('.searchBtn');
+        console.log(searchBtn)
+        const itemElement = document.querySelector('.item');
+        async function getInfo() {
+            const movie = document.querySelector('#movie').value;
+            try {
+                const movieUrl = `http://omdbapi.com/?t=${movie}&apikey=${APIKEY}`;
+                const data = await (await fetch(movieUrl)).json();
+                const posterUrl = data.Poster;
+                const title = data.Title;
+                const genre = data.Genre;
+                const year = data.Year;
+                const plot = data.Plot;
+                const director = data.Director;
+                const actor = data.Actors;
+                const rating = data.Ratings;//[0,1,2]//לטפל במקרה שיש פחות מ3 דירוגים
+                const info =`
+                        <img  src="${posterUrl}" class="poster">
+                        <div class ="title"> ${title} </div>
+                        <div class ="genre"> ${genre}</div>
+                        <div class ="year">${year}</div>
+                        <div class ="plot">${plot}</div>
+                        <div class ="director">${director}</div>
+                        <div class ="actor">${actor}</div>
+                        <div class ="rating">
+                        <div class ="rat">${rating[0].Source} : ${rating[0].Value}</div>
+                        <div class ="rat">${rating[1].Source} : ${rating[1].Value}</div>
+                        <div class ="rat">${rating[2].Source} : ${rating[2].Value}</div>
+                        </div>`;
+                        itemElement.innerHTML=info;
+
+            }
+            // 404 לא מגיע לכאן
+            catch (e) {
+                console.log(e)
+                // document.querySelector('#userName').value = e;
+            }
+        }
+
+        searchBtn.addEventListener('click', getInfo);
+
+
+    </script>
+
+</body>
+
+</html>
