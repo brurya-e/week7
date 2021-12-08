@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>github API</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .search {
+            width: 30vw;
+            height: 10vh;
+            padding: 1%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        #userName{
+            width: 73%;
+            height: 100%;
+            font-size: 25px;
+
+        }
+        .searchBtn{
+            width:25%;
+            height: 100%;
+            background-color: tomato;
+
+        }
+
+        .users {
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            justify-content: start;
+            flex-wrap: wrap;
+
+        }
+
+        .user {
+            padding-left: 1%;
+            padding-right: 1%;
+            width: 12%;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pic {
+            width: 100%;
+            height: 80%;
+        }
+
+        .linkName {
+            width: 100%;
+            height: 10%;
+            text-align: center;
+        }
+
+        .repo {
+            width: 100%;
+            height: 10%;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input type="text" name="userName" id="userName" >
+        <input type="button" class="searchBtn" value="search">
+    </div>
+    <div class="users"> </div>
+
+    <script>
+        const searchBtn = document.querySelector('.searchBtn');
+        const usersElement = document.querySelector('.users');
+        async function getInfo() {
+            try {
+                const userName = document.querySelector('#userName').value;
+                console.log(userName);
+                userUrl = `https://api.github.com/users/${userName}`
+
+                const data = await (await fetch(userUrl)).json();
+                const link = data.html_url
+                const imageUrl = data.avatar_url;
+                const publicRepos = data.public_repos;
+                const name = data.name;
+                const newUser =
+                    `<div class="user">
+                                    <img class="pic"  src= "${imageUrl}">
+                                    <div class="linkName"><a href="${link}">${name}</a></div>
+                                    <div class="repo">${publicRepos}</div>
+                                </div>`
+                usersElement.innerHTML += newUser;
+            }
+            catch (e) {
+                console.log(e)
+                usersElement.innerHTML+= e
+            }
+        }
+
+        searchBtn.addEventListener('click', getInfo);
+
+
+    </script>
+
+</body>
+
+</html>
