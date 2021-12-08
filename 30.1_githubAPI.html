@@ -82,6 +82,7 @@
     <div class="users"> </div>
 
     <script>
+        //TODO: focus and some styling
         const searchBtn = document.querySelector('.searchBtn');
         const usersElement = document.querySelector('.users');
         const allUsers = [];
@@ -110,7 +111,7 @@
                                 </div>`
                     usersElement.innerHTML += newUser;
                 }
-            
+            //לא מגיע לכאן
             catch (e) {
                 console.log(e)
                 document.querySelector('#userName').value =e;
